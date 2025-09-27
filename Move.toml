@@ -1,0 +1,18 @@
+[package]
+name = "aptos_payme"
+version = "1.0.0"
+authors = []
+
+[addresses]
+aptos_payme = "0x8e1ae3070ec91bb532197041d01efa308b5eb02dda9c746c3ba43af7df730f4e"
+test_token = "0x8e1ae3070ec91bb532197041d01efa308b5eb02dda9c746c3ba43af7df730f4e"
+aptos_framework = "0x1"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "testnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
