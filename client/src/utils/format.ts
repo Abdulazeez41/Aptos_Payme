@@ -92,7 +92,7 @@ export const generateShareText = (
   memo: string,
   url: string
 ): string => {
-  return `💰 Payment Request: ${amount} ${token}\n📝 ${memo}\n\n💳 Pay here: ${url}`;
+  return ` Payment Request: ${amount} ${token}\n ${memo}\n\n Pay here: ${url}`;
 };
 
 export const generateWhatsAppUrl = (text: string): string => {

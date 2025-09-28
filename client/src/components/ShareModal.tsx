@@ -68,7 +68,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       });
       setQrCodeUrl(qrUrl);
     } catch (error) {
-      // console.error("Error generating QR code:", error);
+      console.error("Error generating QR code:", error);
     }
   }, [paymentUrl]);
 
@@ -84,7 +84,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      // console.error("Failed to copy:", error);
+      console.error("Failed to copy:", error);
     }
   };
 
