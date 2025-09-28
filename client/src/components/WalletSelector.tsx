@@ -13,7 +13,7 @@ export const WalletSelector: React.FC = () => {
       await connect(walletName);
       setIsOpen(false);
     } catch (error) {
-      // console.error("Failed to connect wallet:", error);
+      console.error("Failed to connect wallet:", error);
     }
   };
 
@@ -22,7 +22,7 @@ export const WalletSelector: React.FC = () => {
       await disconnect();
       setIsOpen(false);
     } catch (error) {
-      // console.error("Failed to disconnect wallet:", error);
+      console.error("Failed to disconnect wallet:", error);
     }
   };
 
@@ -47,25 +47,27 @@ export const WalletSelector: React.FC = () => {
         </button>
 
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-64 overflow-hidden">
             <div className="p-2">
               <div className="text-sm font-medium text-gray-700 px-3 py-2">
                 Choose a wallet
               </div>
-              {wallets.map((wallet) => (
-                <button
-                  key={wallet.name}
-                  onClick={() => handleConnect(wallet.name)}
-                  className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-md transition-colors"
-                >
-                  <img
-                    src={wallet.icon}
-                    alt={wallet.name}
-                    className="w-6 h-6 rounded"
-                  />
-                  <span className="text-sm font-medium">{wallet.name}</span>
-                </button>
-              ))}
+              <div className="max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                {wallets.map((wallet) => (
+                  <button
+                    key={wallet.name}
+                    onClick={() => handleConnect(wallet.name)}
+                    className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-md transition-colors"
+                  >
+                    <img
+                      src={wallet.icon}
+                      alt={wallet.name}
+                      className="w-6 h-6 rounded"
+                    />
+                    <span className="text-sm font-medium">{wallet.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}

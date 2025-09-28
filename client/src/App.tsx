@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { CreateRequest } from "./pages/CreateRequest";
 import { PaymentPage } from "./pages/PaymentPage";
 import { History } from "./pages/History";
+import { NotFound } from "./pages/NotFound";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="history" element={<History />} />
             </Route>
             <Route path="/pay/:requestId" element={<PaymentPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Router>

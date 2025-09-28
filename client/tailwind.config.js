@@ -85,5 +85,23 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".scrollbar-thin": {
+          "scrollbar-width": "thin",
+        },
+        ".scrollbar-thumb-gray-300::-webkit-scrollbar-thumb": {
+          "background-color": "#d1d5db",
+          "border-radius": "0.25rem",
+        },
+        ".scrollbar-track-gray-100::-webkit-scrollbar-track": {
+          "background-color": "#f3f4f6",
+        },
+        ".scrollbar-thin::-webkit-scrollbar": {
+          width: "6px",
+        },
+      });
+    },
+  ],
 };

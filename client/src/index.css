@@ -49,6 +49,25 @@ body {
   background: #94a3b8;
 }
 
+/* Wallet selector scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
 /* Focus styles */
 .focus-visible:focus {
   outline: 2px solid #7b2cbf;
@@ -73,4 +92,28 @@ body {
   body {
     padding-bottom: 80px; /* Space for mobile bottom nav */
   }
+}
+
+/* 404 Page Animations */
+@keyframes glitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.glitch-text {
+  animation: glitch 0.3s ease-in-out infinite alternate;
 }
