@@ -80,7 +80,6 @@ export const Home: React.FC = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500 animate-pulse">
               PayMe
             </span>
-            <Sparkles className="inline-block w-8 h-8 lg:w-12 lg:h-12 text-primary-400 ml-2 animate-spin" />
           </h1>
 
           <div className="flex items-center justify-center space-x-2 mb-4">
@@ -153,15 +152,10 @@ export const Home: React.FC = () => {
             </span>
             ?
           </h2>
-          <div className="flex items-center justify-center space-x-2">
-            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-primary-500"></div>
-            <Sparkles className="w-5 h-5 text-primary-500 animate-spin" />
-            <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-primary-500"></div>
-          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="group bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 animate-fade-in">
+          <div className="group bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 animate-fade-in">
             <div className="w-12 h-12 bg-gradient-to-r from-primary-100 to-primary-200 group-hover:from-primary-500 group-hover:to-primary-600 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
               <Zap className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-300 group-hover:animate-bounce" />
             </div>
@@ -176,7 +170,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div
-            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-green-200 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 animate-fade-in"
+            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-green-200 hover:shadow-xl transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 animate-fade-in"
             style={{ animationDelay: "0.1s" }}
           >
             <div className="w-12 h-12 bg-gradient-to-r from-green-100 to-green-200 group-hover:from-green-500 group-hover:to-green-600 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
@@ -193,7 +187,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div
-            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-purple-200 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 animate-fade-in"
+            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-purple-200 hover:shadow-xl transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 animate-fade-in"
             style={{ animationDelay: "0.2s" }}
           >
             <div className="w-12 h-12 bg-gradient-to-r from-purple-100 to-purple-200 group-hover:from-purple-500 group-hover:to-purple-600 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
@@ -210,7 +204,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div
-            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 animate-fade-in"
+            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 animate-fade-in"
             style={{ animationDelay: "0.3s" }}
           >
             <div className="w-12 h-12 bg-gradient-to-r from-primary-100 to-primary-200 group-hover:from-primary-500 group-hover:to-primary-600 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
@@ -227,7 +221,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div
-            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-orange-200 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 animate-fade-in"
+            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-orange-200 hover:shadow-xl transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 animate-fade-in"
             style={{ animationDelay: "0.4s" }}
           >
             <div className="w-12 h-12 bg-gradient-to-r from-orange-100 to-orange-200 group-hover:from-orange-500 group-hover:to-orange-600 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
@@ -244,7 +238,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div
-            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-red-200 hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 animate-fade-in"
+            className="group relative bg-white rounded-xl p-6 border border-gray-200 hover:border-red-200 hover:shadow-xl transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 animate-fade-in"
             style={{ animationDelay: "0.5s" }}
           >
             <div className="w-12 h-12 bg-gradient-to-r from-red-100 to-red-200 group-hover:from-red-500 group-hover:to-red-600 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
@@ -286,7 +280,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform border border-gray-100 hover:border-primary-200">
+            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 border border-gray-100 hover:border-primary-200">
               <div className="flex items-center mb-4">
                 <div className="text-2xl mr-3 group-hover:animate-bounce">
                   🍕
@@ -297,14 +291,14 @@ export const Home: React.FC = () => {
               </div>
               <p className="text-gray-600 mb-4 group-hover:text-gray-700 transition-colors">
                 Alice splits lunch with 3 friends by sharing a payment link via
-                WhatsApp — they pay instantly in USDT.
+                WhatsApp — they pay instantly in USDC.
               </p>
               <div className="text-sm text-gray-500 group-hover:text-primary-600 transition-colors font-medium">
                 ✨ Solves micro-splitting without cash or IOUs.
               </div>
             </div>
 
-            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform border border-gray-100 hover:border-purple-200">
+            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 border border-gray-100 hover:border-purple-200">
               <div className="flex items-center mb-4">
                 <div className="text-2xl mr-3 group-hover:animate-bounce">
                   💼
@@ -322,7 +316,7 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform border border-gray-100 hover:border-green-200">
+            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 border border-gray-100 hover:border-green-200">
               <div className="flex items-center mb-4">
                 <div className="text-2xl mr-3 group-hover:animate-bounce">
                   👨‍👩‍👧
@@ -340,7 +334,7 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform border border-gray-100 hover:border-orange-200">
+            <div className="group bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-102 transform hover:-translate-y-1 border border-gray-100 hover:border-orange-200">
               <div className="flex items-center mb-4">
                 <div className="text-2xl mr-3 group-hover:animate-bounce">
                   🏪

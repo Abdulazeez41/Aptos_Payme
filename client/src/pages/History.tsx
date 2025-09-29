@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -30,7 +31,50 @@ export const History: React.FC = () => {
   const [typeFilter, setTypeFilter] = useState<"all" | "sent" | "received">(
     "all"
   );
+  const [tokenFilter, setTokenFilter] = useState<"all" | "APT" | "USDC">("all");
   const [exportingCSV, setExportingCSV] = useState(false);
+
+  // Helper function to normalize and match token addresses
+  const findTokenInfo = (tokenAddress: any) => {
+    // Extract the actual address string from the object structure
+    let actualAddress: string;
+    if (typeof tokenAddress === "string") {
+      actualAddress = tokenAddress;
+    } else if (tokenAddress && tokenAddress.inner) {
+      actualAddress = tokenAddress.inner;
+    } else if (tokenAddress && tokenAddress.address) {
+      actualAddress = tokenAddress.address;
+    } else {
+      return DEFAULT_TOKENS[0];
+    }
+
+    // Direct match first
+    let tokenInfo = DEFAULT_TOKENS.find(
+      (token) => token.address === actualAddress
+    );
+    if (tokenInfo) {
+      return tokenInfo;
+    }
+
+    // Special case matching
+    if (
+      actualAddress === "0xa" ||
+      actualAddress === "0x1::aptos_coin::AptosCoin"
+    ) {
+      tokenInfo = DEFAULT_TOKENS.find((t) => t.symbol === "APT");
+      return tokenInfo || DEFAULT_TOKENS[0];
+    }
+
+    if (
+      actualAddress ===
+      "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832"
+    ) {
+      tokenInfo = DEFAULT_TOKENS.find((t) => t.symbol === "USDC");
+      return tokenInfo || DEFAULT_TOKENS[1];
+    }
+
+    return DEFAULT_TOKENS[0];
+  };
 
   useEffect(() => {
     if (isConnected && address) {
@@ -40,7 +84,7 @@ export const History: React.FC = () => {
 
   useEffect(() => {
     filterHistory();
-  }, [history, searchTerm, statusFilter, typeFilter]);
+  }, [history, searchTerm, statusFilter, typeFilter, tokenFilter]);
 
   const loadHistory = async () => {
     if (!address) return;
@@ -52,9 +96,7 @@ export const History: React.FC = () => {
       // Transform blockchain data to our PaymentHistory format
       const formattedHistory: PaymentHistory[] = blockchainHistory.map(
         (item: any) => {
-          const tokenInfo =
-            DEFAULT_TOKENS.find((token) => token.address === item.token) ||
-            DEFAULT_TOKENS[0];
+          const tokenInfo = findTokenInfo(item.token);
 
           // Determine status based on current time and payment status
           let status: "pending" | "completed" | "expired" | "cancelled" =
@@ -107,6 +149,13 @@ export const History: React.FC = () => {
 
     if (typeFilter !== "all") {
       filtered = filtered.filter((item) => item.type === typeFilter);
+    }
+
+    if (tokenFilter !== "all") {
+      filtered = filtered.filter((item) => {
+        const tokenSymbol = item.token.symbol;
+        return tokenSymbol === tokenFilter;
+      });
     }
 
     setFilteredHistory(filtered);
@@ -330,12 +379,30 @@ export const History: React.FC = () => {
             </select>
           </div>
 
+          {/* Token Filter */}
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <DollarSign className="w-5 h-5 text-gray-400" />
+            </div>
+            <select
+              value={tokenFilter}
+              onChange={(e) => setTokenFilter(e.target.value as any)}
+              className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+              title="Filter by token"
+            >
+              <option value="all">All Tokens</option>
+              <option value="APT">APT</option>
+              <option value="USDC">USDC</option>
+            </select>
+          </div>
+
           {/* Clear Filters */}
           <button
             onClick={() => {
               setSearchTerm("");
               setStatusFilter("all");
               setTypeFilter("all");
+              setTokenFilter("all");
             }}
             className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors"
           >

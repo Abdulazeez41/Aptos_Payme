@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import {
@@ -44,6 +45,8 @@ export const PaymentPage: React.FC = () => {
   const [payerBalance, setPayerBalance] = useState<number>(0);
   const [loadingBalance, setLoadingBalance] = useState(false);
   const [actualRequestId, setActualRequestId] = useState<string>("");
+  const [paymentTransactionHash, setPaymentTransactionHash] =
+    useState<string>("");
 
   useEffect(() => {
     if (requestId) {
@@ -75,7 +78,7 @@ export const PaymentPage: React.FC = () => {
           return requestIdOrHash; // It's already a valid object address
         }
       } catch (error) {
-        console.log("Error resolving object address:", error);
+        console.error("Error resolving object address:", error);
         // console.log(
         //   "Not a direct object address, trying to extract from transaction"
         // );
@@ -169,6 +172,22 @@ export const PaymentPage: React.FC = () => {
           if (actualObjectAddress) {
             setActualRequestId(actualObjectAddress);
             // console.log("Resolved actual object address:", actualObjectAddress);
+
+            // Check if this request has been paid and update the UI accordingly
+            const actualRequest = await getPaymentRequest(actualObjectAddress);
+            if (actualRequest) {
+              setRequest(actualRequest);
+              // If request is paid, try to find the payment transaction hash
+              if (actualRequest.paid) {
+                const txHash = await findPaymentTransactionHash(
+                  actualObjectAddress,
+                  actualRequest.payer
+                );
+                if (txHash) {
+                  setPaymentTransactionHash(txHash);
+                }
+              }
+            }
           } else {
             setActualRequestId(requestId);
             // console.log(
@@ -191,6 +210,17 @@ export const PaymentPage: React.FC = () => {
           //   "After blockchain fetch, actualRequestId set to:",
           //   requestId
           // );
+
+          // If request is paid, try to find the payment transaction hash
+          if (req.paid) {
+            const txHash = await findPaymentTransactionHash(
+              requestId,
+              req.payer
+            );
+            if (txHash) {
+              setPaymentTransactionHash(txHash);
+            }
+          }
         }
       }
     } catch (error) {
@@ -229,6 +259,18 @@ export const PaymentPage: React.FC = () => {
       return;
     }
 
+    // Double-check payment status before proceeding
+    try {
+      const currentRequest = await getPaymentRequest(actualRequestId);
+      if (currentRequest?.paid) {
+        // Silently refresh the UI to show paid status instead of showing alert
+        await loadPaymentRequest();
+        return;
+      }
+    } catch (error) {
+      console.error("Error checking payment status:", error);
+    }
+
     try {
       // console.log("Payment details:", {
       //   actualRequestId,
@@ -265,6 +307,56 @@ export const PaymentPage: React.FC = () => {
 
   const getExplorerUrl = (hash: string) => {
     return `https://explorer.aptoslabs.com/txn/${hash}?network=testnet`;
+  };
+
+  const findPaymentTransactionHash = async (
+    requestObjectAddress: string,
+    payerAddress?: string
+  ) => {
+    // Use the provided payer address or fall back to the global request state
+    const payer = payerAddress || request?.payer;
+    if (!payer) {
+      return null;
+    }
+
+    try {
+      // Get the payer's transaction history
+      const transactions = await aptos.getAccountTransactions({
+        accountAddress: payer,
+        options: {
+          limit: 200, // Look at more transactions
+        },
+      });
+
+      // Look for a transaction that contains a PaymentPaid event for this request
+      for (const tx of transactions) {
+        if ("events" in tx && tx.events) {
+          for (const event of tx.events) {
+            if (event.type.includes("PaymentPaid")) {
+              // Check various possible formats for the request address
+              const eventRequestAddress =
+                event.data?.request?.inner ||
+                event.data?.request?.address ||
+                event.data?.request;
+
+              if (eventRequestAddress) {
+                if (
+                  eventRequestAddress === requestObjectAddress &&
+                  "hash" in tx
+                ) {
+                  return tx.hash;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return null;
+    } catch (error) {
+      console.error("Error finding payment transaction hash:", error);
+      return null;
+    }
   };
 
   if (loadingRequest) {
@@ -436,7 +528,7 @@ export const PaymentPage: React.FC = () => {
             </div>
 
             {/* Status */}
-            {request.paid && (
+            {/* {request.paid && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-500" />
@@ -449,8 +541,21 @@ export const PaymentPage: React.FC = () => {
                     Paid by {formatAddress(request.payer)}
                   </div>
                 )}
+                {paymentTransactionHash && (
+                  <div className="text-sm mt-2">
+                    <a
+                      href={getExplorerUrl(paymentTransactionHash)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-green-600 hover:text-green-700 underline"
+                    >
+                      View Transaction
+                      <ExternalLink className="w-3 h-3 ml-1" />
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
+            )} */}
 
             {expired && !request.paid && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
@@ -531,8 +636,36 @@ export const PaymentPage: React.FC = () => {
                   </div>
                 </div>
               ) : request.paid ? (
-                <div className="text-center text-gray-500">
-                  This request has already been paid
+                <div className="text-center space-y-4">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <div className="flex items-center justify-center mb-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-6 h-6 text-green-500" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-green-800 mb-2">
+                      Payment Completed! ✅
+                    </h3>
+
+                    {request.payer && (
+                      <div className="text-sm text-green-700 mb-2">
+                        <strong>Paid by:</strong> {formatAddress(request.payer)}
+                      </div>
+                    )}
+                    {paymentTransactionHash && (
+                      <div className="text-sm">
+                        <a
+                          href={getExplorerUrl(paymentTransactionHash)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-green-600 hover:text-green-700 underline"
+                        >
+                          View Payment Transaction
+                          <ExternalLink className="w-3 h-3 ml-1" />
+                        </a>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : expired ? (
                 <div className="text-center text-gray-500">

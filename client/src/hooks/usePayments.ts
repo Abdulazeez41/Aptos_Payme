@@ -51,6 +51,13 @@ const getTokenMetadataAddress = async (
       // For APT, use the standard metadata object address
       return "0xa";
     }
+    if (
+      tokenType ===
+      "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832"
+    ) {
+      // For USDC, use the standard metadata object address
+      return "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832";
+    }
     // For other tokens, return the provided address
     return tokenType;
   } catch (error) {
@@ -377,10 +384,26 @@ export const usePayments = () => {
             if (functionName.includes("create_payment_request")) {
               // User created a payment request (they are the payee)
               try {
+                // Extract token address from first argument (handle object structure)
+                let tokenAddress = "0xa"; // Default to APT
+                const rawTokenArg = functionArgs[0];
+                if (typeof rawTokenArg === "string") {
+                  tokenAddress = rawTokenArg;
+                } else if (rawTokenArg && rawTokenArg.inner) {
+                  tokenAddress = rawTokenArg.inner;
+                } else if (rawTokenArg && rawTokenArg.address) {
+                  tokenAddress = rawTokenArg.address;
+                }
+
                 const amount = functionArgs[1] ? parseInt(functionArgs[1]) : 0;
                 const memo = functionArgs[2]
                   ? hexToString(functionArgs[2])
                   : "Payment request";
+
+                // console.log(
+                //   "Create request - Token address extracted:",
+                //   tokenAddress
+                // );
 
                 // Check if transaction was successful and if request has been paid
                 const transactionSuccessful = userTx.success === true;
@@ -429,7 +452,7 @@ export const usePayments = () => {
                   id: userTx.hash + "_create",
                   type: "received", // Payee expects to "receive" money from this request
                   amount: amount,
-                  token: "0xa", // Default to APT for now
+                  token: tokenAddress, // Use actual token from transaction
                   memo: memo,
                   date: new Date(parseInt(userTx.timestamp) / 1000),
                   paid: transactionSuccessful && isPaid,
@@ -472,12 +495,53 @@ export const usePayments = () => {
                     // User made the payment (they are the payer)
                     const paymentSuccessful = userTx.success === true;
 
+                    // Try to get token information from the request
+                    let tokenAddress = "0xa"; // Default to APT
+                    let memo = "Payment sent";
+
+                    try {
+                      let requestAddress = "";
+                      if (typeof requestObject === "string") {
+                        requestAddress = requestObject;
+                      } else if (requestObject?.inner) {
+                        requestAddress = requestObject.inner;
+                      } else if (requestObject?.address) {
+                        requestAddress = requestObject.address;
+                      }
+
+                      if (requestAddress) {
+                        const requestData = await aptos.view({
+                          payload: {
+                            function: `${CONTRACT_ADDRESS}::payme::get_request`,
+                            functionArguments: [requestAddress],
+                          },
+                        });
+
+                        if (requestData && requestData.length > 0) {
+                          const request = requestData[0] as any;
+                          tokenAddress = request.token || "0xa";
+                          memo = request.memo
+                            ? hexToString(request.memo)
+                            : "Payment sent";
+                          // console.log(
+                          //   "Payment sent - Token address from request:",
+                          //   tokenAddress
+                          // );
+                        }
+                      }
+                    } catch (error) {
+                      console.log(
+                        "Could not fetch request details for payment:",
+                        error
+                      );
+                    }
+
                     history.push({
                       id: userTx.hash + "_pay",
                       type: "sent", // Payer "sent" money
                       amount: amount,
-                      token: "0xa", // Default to APT for now
-                      memo: "Payment sent",
+                      token: tokenAddress, // Use actual token from request
+                      memo: memo,
                       date: new Date(parseInt(userTx.timestamp) / 1000),
                       paid: paymentSuccessful, // Payment completed if transaction successful
                       payer: userAddress, // User is the payer
@@ -531,6 +595,12 @@ export const usePayments = () => {
                             const originalMemo = request.memo
                               ? hexToString(request.memo)
                               : "Payment received";
+                            const tokenAddress = request.token || "0xa"; // Extract token from request
+
+                            // console.log(
+                            //   "Payment received - Token address from request:",
+                            //   tokenAddress
+                            // );
 
                             const paymentSuccessful = userTx.success === true;
 
@@ -538,7 +608,7 @@ export const usePayments = () => {
                               id: userTx.hash + "_receive",
                               type: "received", // Payee "received" money
                               amount: amount,
-                              token: "0xa", // Default to APT for now
+                              token: tokenAddress, // Use actual token from request
                               memo: originalMemo,
                               date: new Date(parseInt(userTx.timestamp) / 1000),
                               paid: paymentSuccessful, // Payment completed if transaction successful

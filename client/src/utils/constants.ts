@@ -1,5 +1,5 @@
 import aptosLogo from "../assets/aptos.png";
-import tusdLogo from "../assets/usdc.png";
+import usdcLogo from "../assets/usdc.png";
 // Contract addresses from Move.toml
 export const CONTRACT_ADDRESS =
   "0x8e1ae3070ec91bb532197041d01efa308b5eb02dda9c746c3ba43af7df730f4e";
@@ -14,11 +14,12 @@ export const DEFAULT_TOKENS = [
     icon: aptosLogo,
   },
   {
-    address: CONTRACT_ADDRESS + "::test_token",
-    name: "Test USD",
-    symbol: "TUSD",
+    address:
+      "0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832",
+    name: "USD Coin",
+    symbol: "USDC",
     decimals: 6,
-    icon: tusdLogo,
+    icon: usdcLogo,
   },
 ];
 
