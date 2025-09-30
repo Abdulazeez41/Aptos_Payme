@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation } from "react-router-dom";
 import { Home, QrCode, History, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { WalletSelector } from "./WalletSelector";
+import aptosPaymeLogo from "../assets/aptos_payme_logo.png";
 // import { useWallet } from "../hooks/useWallet";
 
 export const Layout: React.FC = () => {
@@ -28,9 +29,11 @@ export const Layout: React.FC = () => {
       <div className="bg-white shadow-sm border-b lg:hidden">
         <div className="px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
+            <img
+              src={aptosPaymeLogo}
+              alt="Aptos PayMe Logo"
+              className="w-8 h-8 rounded-lg"
+            />
             <span className="font-semibold text-gray-900">PayMe</span>
           </Link>
 
@@ -81,9 +84,11 @@ export const Layout: React.FC = () => {
         <div className="flex flex-col flex-grow bg-white border-r border-gray-200">
           <div className="flex items-center flex-shrink-0 px-6 py-4">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-primary-500 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">P</span>
-              </div>
+              <img
+                src={aptosPaymeLogo}
+                alt="Aptos PayMe Logo"
+                className="w-10 h-10 rounded-xl"
+              />
               <div>
                 <span className="text-xl font-bold text-gray-900">
                   Aptos PayMe

@@ -13,6 +13,7 @@ import {
   Coins,
   TrendingUp,
 } from "lucide-react";
+import aptosPaymeLogo from "../assets/aptos_payme_logo.png";
 import { useWallet } from "../hooks/useWallet";
 
 export const Home: React.FC = () => {
@@ -68,10 +69,12 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="relative z-10 mb-8 animate-fade-in">
-          <div className="group inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full mb-6 shadow-lg hover:shadow-primary-500/25 transition-all duration-300 hover:scale-110 cursor-pointer">
-            <span className="text-3xl font-bold text-white group-hover:animate-pulse">
-              P
-            </span>
+          <div className="group inline-flex items-center justify-center w-24 h-24 bg-white rounded-full mb-6 shadow-lg hover:shadow-primary-500/25 transition-all duration-300 hover:scale-110 cursor-pointer p-2">
+            <img
+              src={aptosPaymeLogo}
+              alt="Aptos PayMe Logo"
+              className="w-full h-full object-contain group-hover:animate-pulse"
+            />
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-primary-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
           </div>
 
