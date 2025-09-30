@@ -404,7 +404,7 @@ export const History: React.FC = () => {
               setTypeFilter("all");
               setTokenFilter("all");
             }}
-            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors"
+            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-black rounded-lg font-medium transition-colors"
           >
             Clear Filters
           </button>
@@ -412,7 +412,7 @@ export const History: React.FC = () => {
       </div>
 
       {/* History List */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         {loading ? (
           <div className="p-12 text-center">
             {/* Fancy Loading Spinner */}
@@ -520,7 +520,7 @@ export const History: React.FC = () => {
         ) : (
           <div className="relative">
             <div className="max-h-[600px] overflow-y-auto">
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-gray-300">
                 {filteredHistory.map((item) => (
                   <div
                     key={item.id}

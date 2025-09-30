@@ -39,10 +39,10 @@ export const WalletSelector: React.FC = () => {
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors"
+          className="w-full flex items-center justify-center space-x-2 px-2 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors"
         >
           <Wallet className="w-4 h-4" />
-          <span>Connect Wallet</span>
+          <span className="text-sm">Connect Wallet</span>
           <ChevronDown className="w-4 h-4" />
         </button>
 

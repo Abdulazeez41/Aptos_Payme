@@ -260,14 +260,14 @@ export const Home: React.FC = () => {
       </div>
 
       {/* Use Cases */}
-      <div className="relative py-12 lg:py-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl overflow-hidden">
+      <div className="relative py-12 lg:py-16  ">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-20 h-20 bg-primary-500 rounded-full blur-xl"></div>
           <div className="absolute bottom-10 right-10 w-16 h-16 bg-purple-500 rounded-full blur-lg"></div>
         </div>
 
-        <div className="relative z-10">
+        <div className="relative ">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 animate-slide-up">
               Perfect For{" "}
@@ -360,13 +360,13 @@ export const Home: React.FC = () => {
 
       {/* CTA Section */}
       {isConnected && (
-        <div className="relative text-center py-12 lg:py-16 overflow-hidden">
+        <div className="relative text-center py-12 lg:py-16 ">
           {/* Background Effects */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-primary-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
           </div>
 
-          <div className="relative z-10 animate-fade-in">
+          <div className="relative  animate-fade-in">
             <div className="flex items-center justify-center mb-4">
               <Sparkles className="w-8 h-8 text-primary-500 animate-spin mr-3" />
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-purple-600">
@@ -384,13 +384,9 @@ export const Home: React.FC = () => {
 
             <Link
               to="/request"
-              className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-primary-500 via-primary-600 to-purple-600 hover:from-primary-600 hover:via-primary-700 hover:to-purple-700 text-white rounded-2xl font-bold text-xl transition-all duration-300 shadow-xl hover:shadow-primary-500/25 hover:scale-110 transform overflow-hidden"
+              className=" items-center px-5 py-5 w-60  bg-gradient-to-r from-primary-500 via-primary-600 to-purple-600 hover:from-primary-600 hover:via-primary-700 hover:to-purple-700 text-white rounded-2xl font-bold text-sm transition-all duration-300 shadow-xl hover:shadow-primary-500/25 hover:scale-110 transform overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              <TrendingUp className="w-6 h-6 mr-3 group-hover:animate-bounce" />
               Create Payment Request
-              <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-400/0 to-purple-400/0 group-hover:from-primary-400/20 group-hover:to-purple-400/20 transition-all duration-300"></div>
             </Link>
 
             <div className="mt-6 flex items-center justify-center space-x-4 text-sm text-gray-500">
