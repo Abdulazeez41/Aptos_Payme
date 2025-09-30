@@ -18,8 +18,13 @@ export const ThemeToggle: React.FC = () => {
 
   const toggle = () => {
     const next = !isDark;
+    // Add a temporary transition class for smooth theme change
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    setTimeout(() => root.classList.remove("theme-transition"), 1000);
+
     setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
+    root.classList.toggle("dark", next);
     localStorage.setItem("theme", next ? "dark" : "light");
   };
 

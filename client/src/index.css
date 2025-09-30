@@ -31,6 +31,14 @@ body {
   background-color: #f9fafb;
 }
 
+/* Smooth theme transitions */
+.theme-transition * {
+  transition-property: background-color, color, border-color, fill, stroke,
+    box-shadow;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+}
+
 /* Light mode form controls */
 input,
 select,
