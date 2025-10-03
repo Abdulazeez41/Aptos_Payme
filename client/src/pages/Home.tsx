@@ -386,7 +386,7 @@ export const Home: React.FC = () => {
               to="/request"
               className=" items-center px-5 py-5 w-60  bg-gradient-to-r from-primary-500 via-primary-600 to-purple-600 hover:from-primary-600 hover:via-primary-700 hover:to-purple-700 text-white rounded-2xl font-bold text-sm transition-all duration-300 shadow-xl hover:shadow-primary-500/25 hover:scale-110 transform overflow-hidden"
             >
-              Create Payment Request
+              Create Payment Link
             </Link>
 
             <div className="mt-6 flex items-center justify-center space-x-4 text-sm text-gray-500">
