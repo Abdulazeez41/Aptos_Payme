@@ -1,8 +1,10 @@
 # Aptos PayMe 💸
 
-**PayPal.Me, But On-Chain**
+**PayPal.Me, But On-Chain — the payments rail for Aptos.**
 
-A one-click, global, on-chain payment request system built on Aptos. Generate shareable payment links that anyone can pay instantly with crypto.
+> *"If Aptos is the Global Trading Engine, PayMe is the payments rail that keeps fuel flowing in and out of it."*
+
+PayMe makes on-chain payments as simple as sharing a link. Create ANS-friendly payment requests or QR codes, recipients pay with one click, and payments settle instantly on Aptos with on-chain receipts and webhook notifications for merchants.
 
 ![Aptos PayMe](https://img.shields.io/badge/Built%20on-Aptos-00D4FF?style=for-the-badge&logo=aptos)
 ![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
@@ -37,6 +39,34 @@ A one-click, global, on-chain payment request system built on Aptos. Generate sh
   - Automatic expiry handling
   - Event emission for full auditability
   - Support for any fungible asset on Aptos
+
+## 🗺️ Our Vision: Roadmap
+
+### Foundation & Frictionless UX
+*Eliminating every barrier to entry*
+- **Integrate Aptos Name Service (ANS)**: `username.apt` instead of wallet addresses
+- **Sponsored Transactions**: $0 gas fees for users
+- **Recurring Payments**: Subscriptions, salaries, allowances
+- **P2P Send**: users send tokens directly to Aptos addresses or ANS names
+
+### Become a Payment Primitive  
+*From standalone app to ecosystem infrastructure*
+- **Developer API/SDK**: Any dApp can integrate PayMe checkout
+- **Extended Token Support**: All Aptos tokens, not just stablecoins
+- **Aptos Connect**: Social logins and keyless wallets
+- **Mobile App**: Build a mobile version of PayMe
+
+### Programmable Money & DeFi
+*Leveraging Aptos as a trading engine*
+- **"Pay & Auto-Invest"**: Direct deposits into lending/vaults
+- **Conditional Payments**: Escrow, milestone-based releases
+- **Business Invoicing**: Due dates, late fees, tracking
+
+### Cross-Chain & Global Commerce
+*Making Aptos the hub for global value movement*
+- **Cross-Chain via CCTP**: Ethereum users can pay Aptos links
+- **Physical Commerce**: Enhanced QR codes with NFC suports for retail
+- **Advanced Analytics**: Business insights, tax reporting
 
 ## 🚀 Quick Start
 
