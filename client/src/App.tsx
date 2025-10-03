@@ -8,6 +8,7 @@ import { CreateRequest } from "./pages/CreateRequest";
 import { PaymentPage } from "./pages/PaymentPage";
 import { History } from "./pages/History";
 import { NotFound } from "./pages/NotFound";
+import Send from "./pages/Send";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="request" element={<CreateRequest />} />
               <Route path="history" element={<History />} />
+              <Route path="send" element={<Send />} />
             </Route>
             <Route path="/pay/:requestId" element={<PaymentPage />} />
             <Route path="*" element={<NotFound />} />

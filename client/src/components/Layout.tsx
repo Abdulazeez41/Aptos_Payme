@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Home, QrCode, History, Menu, X } from "lucide-react";
+import { Home, QrCode, History, Menu, X, Wallet } from "lucide-react";
 import { useState } from "react";
 import { WalletSelector } from "./WalletSelector";
 import { ThemeToggle } from "./ThemeToggle";
@@ -14,6 +14,7 @@ export const Layout: React.FC = () => {
 
   const navigation = [
     { name: "Home", href: "/", icon: Home },
+    { name: "Send", href: "/send", icon: Wallet },
     { name: "Request", href: "/request", icon: QrCode },
     { name: "History", href: "/history", icon: History },
   ];
