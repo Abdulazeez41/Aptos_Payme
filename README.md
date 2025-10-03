@@ -194,15 +194,6 @@ aptos move publish --profile default
 
 ## 🔧 Configuration
 
-### Environment Variables
-
-Create a `.env` file in the `client` directory:
-
-```env
-VITE_APTOS_NETWORK=testnet
-VITE_CONTRACT_ADDRESS=0x8e1ae3070ec91bb532197041d01efa308b5eb02dda9c746c3ba43af7df730f4e
-```
-
 ### Supported Wallets
 
 - Petra Wallet
