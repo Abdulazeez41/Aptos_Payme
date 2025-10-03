@@ -4,8 +4,6 @@
 
 > *"If Aptos is the Global Trading Engine, PayMe is the payments rail that keeps fuel flowing in and out of it."*
 
-PayMe transforms on-chain payments with one-click, shareable payment links making crypto payments as simple as sharing a link.
-
 PayMe makes on-chain payments as simple as sharing a link. Create ANS-friendly payment requests or QR codes, recipients pay with one click, and payments settle instantly on Aptos with on-chain receipts and webhook notifications for merchants.
 
 ![Aptos PayMe](https://img.shields.io/badge/Built%20on-Aptos-00D4FF?style=for-the-badge&logo=aptos)
