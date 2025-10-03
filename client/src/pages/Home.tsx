@@ -97,11 +97,11 @@ export const Home: React.FC = () => {
           </div>
 
           <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            A <span className="font-semibold text-primary-600">one-click</span>,{" "}
-            <span className="font-semibold text-purple-600">global</span>,{" "}
-            <span className="font-semibold text-pink-600">on-chain</span>{" "}
-            payment request system built on Aptos. Generate shareable payment
-            links that anyone can pay instantly with crypto.
+            The <span className="font-semibold text-primary-600">payments rail</span> that powers the Aptos ecosystem.{" "}
+            <span className="font-semibold text-purple-600">Create</span>,{" "}
+            <span className="font-semibold text-pink-600">share</span>, and{" "}
+            <span className="font-semibold text-green-600">receive</span>{" "}
+            payments as easily as sharing a link. Built for the future of money.
           </p>
         </div>
 
@@ -183,8 +183,8 @@ export const Home: React.FC = () => {
               Global & Permissionless 🌍
             </h3>
             <p className="text-gray-600 group-hover:text-gray-700 transition-colors">
-              Send and receive payments anywhere in the world. No bank accounts
-              or geo-restrictions.
+              Send and receive money anywhere, anytime. No borders, no banks, no
+              barriers—just pure financial freedom.
             </p>
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/0 to-green-500/0 group-hover:from-green-500/5 group-hover:to-blue-500/5 transition-all duration-300"></div>
           </div>
